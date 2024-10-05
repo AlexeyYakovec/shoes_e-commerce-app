@@ -20,7 +20,7 @@ const OrdersPage = () => {
     return (
         <Card>
             <CardHeader className="px-7">
-                <CardTitle className="text-3xl">Orders</CardTitle>
+                <CardTitle className="text-2xl">Orders</CardTitle>
                 <CardDescription>Recent orders from your store</CardDescription>
             </CardHeader>
 
@@ -36,7 +36,7 @@ const OrdersPage = () => {
                         </TableRow>
                     </TableHeader>
 
-                    <TableBody>
+                    <TableBody className="mt-2">
                         <TableRow>
                             <TableCell>
                                 <p className="font-semibold">

@@ -23,7 +23,6 @@ interface Props {
 async function DashboardLayout({ children }: Props) {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
-    console.log(user);
 
     if (!user || user.email !== "pajiaduh2222@gmail.com") {
         return redirect("/");
