@@ -22,6 +22,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import { cn } from "@/lib/utils";
 
 import { DropdownMenu } from "@radix-ui/react-dropdown-menu";
 import {
@@ -105,7 +106,15 @@ const ProductsRoute: React.FC<Props> = async () => {
                                             />
                                         </TableCell>
                                         <TableCell> {item.name} </TableCell>
-                                        <TableCell className="text-muted-foreground">
+                                        <TableCell
+                                            className={cn(
+                                                "font-semibold",
+                                                `${
+                                                    item.status === "published"
+                                                        ? "text-green-500"
+                                                        : "text-red-500"
+                                                }`,
+                                            )}>
                                             {item.status}
                                         </TableCell>
                                         <TableCell>${item.price}</TableCell>
@@ -128,13 +137,20 @@ const ProductsRoute: React.FC<Props> = async () => {
                                                         Actions
                                                     </DropdownMenuLabel>
                                                     <DropdownMenuSeparator />
-                                                    <DropdownMenuItem className="flex items-center gap-2">
-                                                        <Pencil size={16} />
-                                                        Edit
+                                                    <DropdownMenuItem asChild>
+                                                        <Link
+                                                            href={`/dashboard/products/${item.id}`}
+                                                            className="flex items-center gap-2">
+                                                            <Pencil size={16} />
+                                                            Edit
+                                                        </Link>
                                                     </DropdownMenuItem>
                                                     <DropdownMenuItem className="flex items-center gap-2">
                                                         <PackageX size={16} />
-                                                        Delete
+                                                        <Link
+                                                            href={`/dashboard/products/${item.id}/delete`}>
+                                                            Delete
+                                                        </Link>
                                                     </DropdownMenuItem>
                                                 </DropdownMenuContent>
                                             </DropdownMenu>
