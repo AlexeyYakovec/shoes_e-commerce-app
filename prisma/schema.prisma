@@ -31,18 +31,19 @@ model Product {
   price       Int
   images      String[]
   category    Category
+  isFeatured  Boolean       @default(false)
 
   createdAt DateTime @default(now())
-}
-
-enum Category {
-  man
-  women
-  kids
 }
 
 enum ProductStatus {
   draft
   published
   archived
+}
+
+enum Category {
+  men
+  women
+  kids
 }

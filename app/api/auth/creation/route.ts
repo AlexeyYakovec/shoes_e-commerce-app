@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
-    console.log("User: ", user);
+    // console.log("User: ", user);
 
     if (!user || user === null || !user.id) {
         throw new Error("Something went wrong");

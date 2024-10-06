@@ -1,3 +1,4 @@
+import prisma from "@/app/lib/db";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -30,6 +31,7 @@ import {
     Pencil,
     PackageX,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -37,7 +39,19 @@ interface Props {
     className?: string;
 }
 
-const ProductsRoute: React.FC<Props> = () => {
+async function getData() {
+    const data = await prisma.product.findMany({
+        orderBy: {
+            createdAt: "desc",
+        },
+    });
+
+    return data;
+}
+
+const ProductsRoute: React.FC<Props> = async () => {
+    const data = await getData();
+
     return (
         <>
             <div className="flex items-center justify-end">
@@ -78,42 +92,56 @@ const ProductsRoute: React.FC<Props> = () => {
                         </TableHeader>
 
                         <TableBody>
-                            <TableRow>
-                                <TableCell>
-                                    <UserIcon className="h-10 w-10" />
-                                </TableCell>
-                                <TableCell>Nike air</TableCell>
-                                <TableCell className="text-green-600 font-semibold tracking-wide">
-                                    Active
-                                </TableCell>
-                                <TableCell>$299.00</TableCell>
-                                <TableCell>2024/01/01</TableCell>
-                                <TableCell className="text-end">
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button
-                                                size={"icon"}
-                                                variant={"ghost"}>
-                                                <MoreHorizontal className="w-4 h-4" />
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent>
-                                            <DropdownMenuLabel>
-                                                Actions
-                                            </DropdownMenuLabel>
-                                            <DropdownMenuSeparator />
-                                            <DropdownMenuItem className="flex items-center gap-2">
-                                                <Pencil size={16} />
-                                                Edit
-                                            </DropdownMenuItem>
-                                            <DropdownMenuItem className="flex items-center gap-2">
-                                                <PackageX size={16} />
-                                                Delete
-                                            </DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                </TableCell>
-                            </TableRow>
+                            {data.map((item) => {
+                                return (
+                                    <TableRow key={item.id}>
+                                        <TableCell>
+                                            <Image
+                                                alt="Product Image"
+                                                height={64}
+                                                width={64}
+                                                src={item.images[0]}
+                                                className="rounded-md object-cover h-16 w-16"
+                                            />
+                                        </TableCell>
+                                        <TableCell> {item.name} </TableCell>
+                                        <TableCell className="text-muted-foreground">
+                                            {item.status}
+                                        </TableCell>
+                                        <TableCell>${item.price}</TableCell>
+                                        <TableCell>
+                                            {new Intl.DateTimeFormat(
+                                                "en-US",
+                                            ).format(item.createdAt)}
+                                        </TableCell>
+                                        <TableCell className="text-end">
+                                            <DropdownMenu>
+                                                <DropdownMenuTrigger asChild>
+                                                    <Button
+                                                        size={"icon"}
+                                                        variant={"ghost"}>
+                                                        <MoreHorizontal className="w-4 h-4" />
+                                                    </Button>
+                                                </DropdownMenuTrigger>
+                                                <DropdownMenuContent>
+                                                    <DropdownMenuLabel>
+                                                        Actions
+                                                    </DropdownMenuLabel>
+                                                    <DropdownMenuSeparator />
+                                                    <DropdownMenuItem className="flex items-center gap-2">
+                                                        <Pencil size={16} />
+                                                        Edit
+                                                    </DropdownMenuItem>
+                                                    <DropdownMenuItem className="flex items-center gap-2">
+                                                        <PackageX size={16} />
+                                                        Delete
+                                                    </DropdownMenuItem>
+                                                </DropdownMenuContent>
+                                            </DropdownMenu>
+                                        </TableCell>
+                                    </TableRow>
+                                );
+                            })}
                         </TableBody>
                     </Table>
                 </CardContent>
