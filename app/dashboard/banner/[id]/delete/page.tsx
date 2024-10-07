@@ -1,4 +1,4 @@
-import { deleteProduct } from "@/app/actions";
+import { deleteBanner, deleteProduct } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -27,12 +27,12 @@ export default function BannerDeleteRoute({
                 </CardHeader>
                 <CardFooter className="w-full flex justify-between">
                     <Button variant="secondary" asChild>
-                        <Link href="/dashboard/products">Cancel</Link>
+                        <Link href="/dashboard/banner">Cancel</Link>
                     </Button>
-                    <form action={deleteProduct}>
+                    <form action={deleteBanner}>
                         <input
                             type="hidden"
-                            name="productId"
+                            name="bannerId"
                             value={params.id}
                         />
                         <SubmitButton
