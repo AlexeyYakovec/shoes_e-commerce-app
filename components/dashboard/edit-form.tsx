@@ -244,8 +244,8 @@ export function EditForm({ data }: Props) {
                             ) : (
                                 <UploadDropzone
                                     endpoint="imageUploader"
-                                    onClientUploadComplete={(res) => {
-                                        setImages(res.map((r) => r.url));
+                                    onClientUploadComplete={(res: any) => {
+                                        setImages(res.map((r: any) => r.url));
                                     }}
                                     onUploadError={() => {
                                         alert("Something went wrong");

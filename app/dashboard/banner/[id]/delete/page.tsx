@@ -1,4 +1,4 @@
-import { deleteBanner } from "@/app/actions";
+import { deleteProduct } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -10,7 +10,11 @@ import {
 import { SubmitButton } from "@/components/ui/submit-button";
 import Link from "next/link";
 
-export default function DeleteRoute({ params }: { params: { id: string } }) {
+export default function BannerDeleteRoute({
+    params,
+}: {
+    params: { id: string };
+}) {
     return (
         <div className="h-[80vh] w-full flex items-center justify-center">
             <Card className="max-w-xl">
@@ -18,23 +22,22 @@ export default function DeleteRoute({ params }: { params: { id: string } }) {
                     <CardTitle>Are you absolutely sure?</CardTitle>
                     <CardDescription>
                         This action cannot be undone. This will permanently
-                        delete this product and remove all data from our
-                        servers.
+                        delete this banner and remove all data from our servers.
                     </CardDescription>
                 </CardHeader>
                 <CardFooter className="w-full flex justify-between">
                     <Button variant="secondary" asChild>
                         <Link href="/dashboard/products">Cancel</Link>
                     </Button>
-                    <form action={deleteBanner}>
+                    <form action={deleteProduct}>
                         <input
                             type="hidden"
-                            name="bannerId"
+                            name="productId"
                             value={params.id}
                         />
                         <SubmitButton
                             variant="destructive"
-                            text="Delete Product"
+                            text="Delete Banner"
                         />
                     </form>
                 </CardFooter>

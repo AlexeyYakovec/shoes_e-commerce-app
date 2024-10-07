@@ -22,12 +22,12 @@ export function SubmitButton({ text, variant }: buttonProps) {
     return (
         <>
             {pending ? (
-                <Button className="ml-auto" disabled variant={variant}>
+                <Button className="mr-auto" disabled variant={variant}>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Please Wait
                 </Button>
             ) : (
-                <Button className="ml-auto" variant={variant} type="submit">
+                <Button className="mr-auto" variant={variant} type="submit">
                     {text}
                 </Button>
             )}
