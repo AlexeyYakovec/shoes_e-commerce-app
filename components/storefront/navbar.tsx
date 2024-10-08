@@ -1,9 +1,15 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
-import { NavbarLinks } from "./index";
+import { NavbarLinks, UserDropdown } from "./index";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ShoppingBagIcon } from "lucide-react";
+import { ModeToggle } from "../ui/mode-toggle";
+import { Button } from "../ui/button";
+import {
+    LoginLink,
+    RegisterLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
 
 interface Props {
     className?: string;
@@ -12,6 +18,7 @@ interface Props {
 export const Navbar: React.FC<Props> = async ({ className }) => {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
+    console.log(user);
 
     return (
         <nav
@@ -21,7 +28,7 @@ export const Navbar: React.FC<Props> = async ({ className }) => {
             )}>
             <div className="flex items-center">
                 <Link href={"/"}>
-                    <h1 className="text-black font-bold text-xl lg:text-3xl">
+                    <h1 className="text-inherit font-bold text-xl lg:text-3xl">
                         como
                         <span className="text-primary font-extrabold">
                             Shoes
@@ -33,17 +40,36 @@ export const Navbar: React.FC<Props> = async ({ className }) => {
             </div>
 
             <div className="flex items-center">
+                <ModeToggle className="mr-12" />
                 {user ? (
-                    <Link
-                        href={"/bag"}
-                        className="group p-2 flex items-center mr-2">
-                        <ShoppingBagIcon className="h-6 w-6 text-gray-600 group-hover:text-gray-500 transition-all" />
-                        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                            5
-                        </span>
-                    </Link>
+                    <>
+                        <Link
+                            href={"/bag"}
+                            className="group p-2 flex items-center mr-4">
+                            <ShoppingBagIcon className="h-6 w-6 text-gray-500 group-hover:text-gray-600 group-hover:transition-all" />
+                            <span className="ml-1 text-sm font-medium text-inherit group-hover:opacity-50">
+                                5
+                            </span>
+                        </Link>
+                        <UserDropdown
+                            name={user.given_name as string}
+                            email={user.email as string}
+                            userImage={
+                                user.picture ??
+                                `https://avatar.vercel.sh/${user.given_name}`
+                            }
+                        />
+                    </>
                 ) : (
-                    <h1>not autenticated</h1>
+                    <div className="hidden md:flex md:flex-1 md:items-center md:justify-end">
+                        <Button variant={"ghost"}>
+                            <LoginLink>Sign in</LoginLink>
+                        </Button>
+                        <span className="h-6 w-px bg-gray-200"></span>
+                        <Button variant={"ghost"}>
+                            <RegisterLink>Create Account</RegisterLink>
+                        </Button>
+                    </div>
                 )}
             </div>
         </nav>

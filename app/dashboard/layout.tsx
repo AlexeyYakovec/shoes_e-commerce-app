@@ -25,12 +25,12 @@ async function DashboardLayout({ children }: Props) {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
-    if (!user || user.email !== "pajiaduh2222@gmail.com") {
+    if (!user || user.email !== "alekseyyakovets8952@gmail.com") {
         return redirect("/");
     }
     return (
         <div className="flex w-full flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-            <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-white">
+            <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-background">
                 <nav className="hidden font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-medium lg:gap-6">
                     <DashboardNavigation />
                 </nav>
