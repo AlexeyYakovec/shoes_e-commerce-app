@@ -18,7 +18,6 @@ interface Props {
 export const Navbar: React.FC<Props> = async ({ className }) => {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
-    console.log(user);
 
     return (
         <nav
