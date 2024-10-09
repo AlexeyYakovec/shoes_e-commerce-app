@@ -56,9 +56,7 @@ const ProductIdRoute = async ({ params }: { params: { id: string } }) => {
                     </p>
 
                     <form action={addProductToShoppingCart}>
-                        <Button
-                            size={"lg"}
-                            className="w-full mt-5 text-inherit">
+                        <Button size={"lg"} className="w-full mt-5 text-white">
                             <ShoppingBag className=" mr-5 h-5 w-5" /> Add to bag
                         </Button>
                     </form>

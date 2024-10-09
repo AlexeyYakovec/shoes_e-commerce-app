@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${fontSans.className} antialiased`}>
+            <body className={`${fontSans.className} antialiased flex flex-col`}>
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="light"
