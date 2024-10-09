@@ -37,7 +37,7 @@ export const CategorySelection: React.FC<Props> = ({ className }) => {
                     <div className="p-6 flex items-end">
                         <Link href={"/products/all"}>
                             <h3 className="text-white font-semibold">
-                                All products
+                                All Products
                             </h3>
                             <span className="text-white mt-1 text-sm">
                                 Shop Now

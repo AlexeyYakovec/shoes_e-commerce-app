@@ -1,5 +1,8 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 interface Props {
@@ -35,6 +38,8 @@ export const navbarLinks = [
 ];
 
 export const NavbarLinks: React.FC<Props> = ({ className }) => {
+    const location = usePathname();
+
     return (
         <div
             className={cn(
@@ -46,7 +51,13 @@ export const NavbarLinks: React.FC<Props> = ({ className }) => {
                     <Link
                         href={link.href}
                         key={link.id}
-                        className="font-medium hover:text-gray-400 transition-all">
+                        className={cn(
+                            location === link.href
+                                ? "bg-muted"
+                                : "hover:bg-muted hover:bg-opacity-75",
+                            "text-sm",
+                            "group p-2 font font-medium rounded-md hover:text-gray-400 transition-all",
+                        )}>
                         {link.name}
                     </Link>
                 );

@@ -3,3 +3,7 @@ export { NavbarLinks } from "./navbar-links";
 export { UserDropdown } from "./user-dropdown";
 export { Hero } from "./hero";
 export { CategorySelection } from "./category-selection";
+export { FeaturedProducts } from "./featured-products";
+export { ProductCard } from "./product-card";
+export { ImageSlider } from "./image-slider";
+export { Footer } from "./footer";
