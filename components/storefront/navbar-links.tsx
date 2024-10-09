@@ -55,7 +55,7 @@ export const NavbarLinks: React.FC<Props> = ({ className }) => {
                             location === link.href
                                 ? "bg-muted"
                                 : "hover:bg-muted hover:bg-opacity-75",
-                            "text-sm",
+                            "text-base",
                             "group p-2 font font-medium rounded-md hover:text-gray-400 transition-all",
                         )}>
                         {link.name}

@@ -50,11 +50,11 @@ const ProductIdRoute = async ({ params }: { params: { id: string } }) => {
                         <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
                     </div>
 
-                    <p className="text-base text-gray-700 mt-6">
+                    <p className="text-base text-inherit opacity-80 mt-6">
                         {data.description}
                     </p>
 
-                    <Button size={"lg"} className="w-full mt-5">
+                    <Button size={"lg"} className="w-full mt-5 text-inherit">
                         <ShoppingBag className=" mr-5 h-5 w-5" /> Add to bag
                     </Button>
                 </div>
