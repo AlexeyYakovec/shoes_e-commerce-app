@@ -9,8 +9,10 @@ import { redirect } from "next/navigation";
 import { DeleteItem } from "@/components/ui/delete-item";
 import { delItem } from "@/app/actions";
 import { ChceckoutButton } from "@/components/ui/checkout-button";
+import { unstable_noStore as noStore } from "next/cache";
 
 export default async function BagRoute() {
+    noStore();
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
