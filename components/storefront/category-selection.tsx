@@ -3,9 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-import men from "@/products/Men/creaslim-SrqCf0SBaS8-unsplash.jpg";
-import women from "@/products/Women/luis-santoyo-JD1Md2OUtN8-unsplash.jpg";
-import gazelle from "@/products/Adidas Gazelle Bold 'Cream Collegiate Green'/karsten-winegeart-JEB9POyoKbE-unsplash.jpg";
+import men from "../../products/Men/creaslim-SrqCf0SBaS8-unsplash.jpg";
+import women from "../../products/Women/luis-santoyo-JD1Md2OUtN8-unsplash.jpg";
+import gazelle from "../../products/Adidas Gazelle Bold 'Cream Collegiate Green'/karsten-winegeart-JEB9POyoKbE-unsplash.jpg";
 
 interface Props {
     className?: string;
