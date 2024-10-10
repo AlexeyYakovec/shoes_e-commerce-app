@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { Skeleton } from "../ui/skeleton";
 
 interface Props {
     item: {
@@ -55,6 +56,21 @@ export function ProductCard({ item }: Props) {
             <Button asChild className="w-full mt-5">
                 <Link href={`/product/${item.id}`}>Learn More!</Link>
             </Button>
+        </div>
+    );
+}
+
+export function LoadingProductCard() {
+    return (
+        <div className="flex flex-col">
+            <Skeleton className="w-full h-[330px]" />
+            <div className="flex flex-col mt-2 gap-y-2">
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="w-full h-6" />
+            </div>
+            <div>
+                <Skeleton className="w-full h-10 mt-5" />
+            </div>
         </div>
     );
 }
