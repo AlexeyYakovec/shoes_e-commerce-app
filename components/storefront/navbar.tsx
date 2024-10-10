@@ -10,6 +10,8 @@ import {
     LoginLink,
     RegisterLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
+import { redis } from "@/app/lib/redis";
+import { Cart } from "@/app/lib/interfaces";
 
 interface Props {
     className?: string;
@@ -18,6 +20,11 @@ interface Props {
 export const Navbar: React.FC<Props> = async ({ className }) => {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
+
+    const cart: Cart | null = await redis.get(`cart-${user?.id}`);
+
+    const total =
+        cart?.items.reduce((sum, item) => sum + item.quantity, 0) || 0;
 
     return (
         <nav
@@ -47,7 +54,7 @@ export const Navbar: React.FC<Props> = async ({ className }) => {
                             className="group p-2 flex items-center mr-4">
                             <ShoppingBagIcon className="h-6 w-6 text-gray-500 group-hover:text-gray-600 group-hover:transition-all" />
                             <span className="ml-1 text-sm font-medium text-inherit group-hover:opacity-50">
-                                5
+                                {total}
                             </span>
                         </Link>
                         <UserDropdown
