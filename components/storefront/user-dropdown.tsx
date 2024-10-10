@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import React from "react";
 import {
     DropdownMenu,
@@ -12,7 +11,6 @@ import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import Image from "next/image";
 
 interface Props {
     email: string;

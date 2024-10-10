@@ -43,8 +43,8 @@ export function ProductCard({ item }: Props) {
             </Carousel>
 
             <div className="flex justify-between items-center mt-2">
-                <h1 className="font-semibold text-xl">{item.name}</h1>
-                <h3 className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
+                <h1 className="font-semibold text-xl h-[54px]">{item.name}</h1>
+                <h3 className="inline-flex items-center self-start rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
                     ${item.price}
                 </h3>
             </div>

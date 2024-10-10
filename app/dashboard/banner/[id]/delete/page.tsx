@@ -1,4 +1,4 @@
-import { deleteBanner, deleteProduct } from "@/app/actions";
+import { deleteBanner } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import {
     Card,

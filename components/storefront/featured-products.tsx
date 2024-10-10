@@ -1,11 +1,6 @@
 import prisma from "@/app/lib/db";
-import { cn } from "@/lib/utils";
 import React from "react";
 import { ProductCard } from ".";
-
-interface Props {
-    className?: string;
-}
 
 async function getData() {
     const data = await prisma.product.findMany({
@@ -29,7 +24,7 @@ async function getData() {
     return data;
 }
 
-export const FeaturedProducts: React.FC<Props> = async ({ className }) => {
+export const FeaturedProducts = async () => {
     const data = await getData();
 
     return (

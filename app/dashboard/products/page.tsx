@@ -36,10 +36,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-interface Props {
-    className?: string;
-}
-
 async function getData() {
     const data = await prisma.product.findMany({
         orderBy: {
@@ -50,7 +46,7 @@ async function getData() {
     return data;
 }
 
-const ProductsRoute: React.FC<Props> = async () => {
+const ProductsRoute = async () => {
     const data = await getData();
 
     return (

@@ -1,6 +1,6 @@
 import prisma from "@/app/lib/db";
 import { ProductCard } from "@/components/storefront";
-import { notFound, usePathname } from "next/navigation";
+import { notFound } from "next/navigation";
 
 async function getData(productCategory: string) {
     switch (productCategory) {

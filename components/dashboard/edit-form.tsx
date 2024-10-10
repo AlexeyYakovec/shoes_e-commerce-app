@@ -25,7 +25,7 @@ import {
 import Image from "next/image";
 import { UploadDropzone } from "@uploadthing/react";
 import { categories } from "@/app/lib/categories";
-import { createProduct, editProduct } from "@/app/actions";
+import { editProduct } from "@/app/actions";
 
 import { useFormState } from "react-dom";
 import { useForm } from "@conform-to/react";
@@ -35,6 +35,7 @@ import { productSchema } from "@/app/lib/zodSchemas";
 import { SubmitButton } from "../ui/submit-button";
 import { type $Enums } from "@prisma/client";
 import Link from "next/link";
+import { OurFileRouter } from "@/app/api/uploadthing/core";
 
 interface Props {
     data: {
@@ -51,15 +52,13 @@ interface Props {
 }
 
 export function EditForm({ data }: Props) {
-    const [images, setImages] = useState<string[]>(data?.images || []);
+    const [images, setImages] = useState<string[]>(data?.images ?? []);
     const [lastResult, action] = useFormState(editProduct, undefined);
     const [form, fields] = useForm({
         lastResult,
 
         onValidate({ formData }) {
-            return parseWithZod(formData, {
-                schema: productSchema,
-            });
+            return parseWithZod(formData, { schema: productSchema });
         },
 
         shouldValidate: "onBlur",
@@ -69,17 +68,15 @@ export function EditForm({ data }: Props) {
     const handleDelete = (index: number) => {
         setImages(images.filter((_, i) => i !== index));
     };
-
     return (
         <form id={form.id} onSubmit={form.onSubmit} action={action}>
             <input type="hidden" name="productId" value={data?.id} />
             <div className="flex items-center gap-4">
-                <Button variant={"outline"} size={"icon"}>
-                    <Link href={"/dashboard/products"}>
+                <Button variant="outline" size="icon" asChild>
+                    <Link href="/dashboard/products">
                         <ChevronLeft className="w-4 h-4" />
                     </Link>
                 </Button>
-
                 <h1 className="text-xl font-semibold tracking-tight">
                     Edit Product
                 </h1>
@@ -89,21 +86,20 @@ export function EditForm({ data }: Props) {
                 <CardHeader>
                     <CardTitle>Product Details</CardTitle>
                     <CardDescription>
-                        In this section you can update your product
+                        In this form you can update your product
                     </CardDescription>
                 </CardHeader>
-
                 <CardContent>
                     <div className="flex flex-col gap-6">
                         <div className="flex flex-col gap-3">
                             <Label>Name</Label>
                             <Input
+                                type="text"
                                 key={fields.name.key}
                                 name={fields.name.name}
                                 defaultValue={data?.name}
-                                placeholder="Product Name"
-                                type="text"
                                 className="w-full"
+                                placeholder="Product Name"
                             />
 
                             <p className="text-red-500">{fields.name.errors}</p>
@@ -115,14 +111,12 @@ export function EditForm({ data }: Props) {
                                 key={fields.description.key}
                                 name={fields.description.name}
                                 defaultValue={data?.description}
-                                placeholder="Write your description..."
+                                placeholder="Write your description right here..."
                             />
-
                             <p className="text-red-500">
                                 {fields.description.errors}
                             </p>
                         </div>
-
                         <div className="flex flex-col gap-3">
                             <Label>Price</Label>
                             <Input
@@ -131,9 +125,7 @@ export function EditForm({ data }: Props) {
                                 defaultValue={data?.price}
                                 type="number"
                                 placeholder="$55"
-                                className="w-40"
                             />
-
                             <p className="text-red-500">
                                 {fields.price.errors}
                             </p>
@@ -160,7 +152,6 @@ export function EditForm({ data }: Props) {
                                 <SelectTrigger>
                                     <SelectValue placeholder="Select Status" />
                                 </SelectTrigger>
-
                                 <SelectContent>
                                     <SelectItem value="draft">Draft</SelectItem>
                                     <SelectItem value="published">
@@ -171,7 +162,6 @@ export function EditForm({ data }: Props) {
                                     </SelectItem>
                                 </SelectContent>
                             </Select>
-
                             <p className="text-red-500">
                                 {fields.status.errors}
                             </p>
@@ -186,20 +176,16 @@ export function EditForm({ data }: Props) {
                                 <SelectTrigger>
                                     <SelectValue placeholder="Select Category" />
                                 </SelectTrigger>
-
                                 <SelectContent>
-                                    {categories.map((category) => {
-                                        return (
-                                            <SelectItem
-                                                key={category.id}
-                                                value={category.name}>
-                                                {category.title}
-                                            </SelectItem>
-                                        );
-                                    })}
+                                    {categories.map((category) => (
+                                        <SelectItem
+                                            key={category.id}
+                                            value={category.name}>
+                                            {category.title}
+                                        </SelectItem>
+                                    ))}
                                 </SelectContent>
                             </Select>
-
                             <p className="text-red-500">
                                 {fields.category.errors}
                             </p>
@@ -207,17 +193,15 @@ export function EditForm({ data }: Props) {
 
                         <div className="flex flex-col gap-3">
                             <Label>Images</Label>
+                            <input
+                                type="hidden"
+                                value={images}
+                                key={fields.images.key}
+                                name={fields.images.name}
+                                defaultValue={fields.images.initialValue as any}
+                            />
                             {images.length > 0 ? (
                                 <div className="flex gap-5">
-                                    <input
-                                        type="hidden"
-                                        value={images}
-                                        key={fields.images.key}
-                                        name={fields.images.name}
-                                        defaultValue={
-                                            fields.images.initialValue as any
-                                        }
-                                    />
                                     {images.map((image, index) => (
                                         <div
                                             key={index}
@@ -226,7 +210,7 @@ export function EditForm({ data }: Props) {
                                                 height={100}
                                                 width={100}
                                                 src={image}
-                                                alt="Products Image"
+                                                alt="Product Image"
                                                 className="w-full h-full object-cover rounded-lg border"
                                             />
 
@@ -242,25 +226,25 @@ export function EditForm({ data }: Props) {
                                     ))}
                                 </div>
                             ) : (
-                                <UploadDropzone
+                                <UploadDropzone<OurFileRouter, any>
                                     endpoint="imageUploader"
                                     onClientUploadComplete={(res: any) => {
-                                        setImages(res.map((r: any) => r.url));
+                                        setImages(res.map((r: any) => r.url)); // Если результат содержит поле `url`
                                     }}
                                     onUploadError={() => {
                                         alert("Something went wrong");
                                     }}
                                 />
                             )}
+
                             <p className="text-red-500">
                                 {fields.images.errors}
                             </p>
                         </div>
                     </div>
                 </CardContent>
-
-                <CardFooter className="flex">
-                    <SubmitButton variant={"default"} text="Edit Product" />
+                <CardFooter>
+                    <SubmitButton text="Edit Product" />
                 </CardFooter>
             </Card>
         </form>

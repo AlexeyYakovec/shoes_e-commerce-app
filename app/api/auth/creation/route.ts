@@ -1,17 +1,22 @@
 import prisma from "@/app/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextResponse } from "next/server";
+import { unstable_noStore as noStore } from "next/cache";
 
 export async function GET() {
+    noStore();
     const { getUser } = getKindeServerSession();
     const user = await getUser();
-    // console.log("User: ", user);
 
     if (!user || user === null || !user.id) {
-        throw new Error("Something went wrong");
+        throw new Error("Something went wrong...");
     }
 
-    let dbUser = await prisma.user.findUnique({ where: { id: user.id } });
+    let dbUser = await prisma.user.findUnique({
+        where: {
+            id: user.id,
+        },
+    });
 
     if (!dbUser) {
         dbUser = await prisma.user.create({
@@ -27,5 +32,9 @@ export async function GET() {
         });
     }
 
-    return NextResponse.redirect("http://localhost:3000/");
+    return NextResponse.redirect(
+        process.env.NODE_ENV === "development"
+            ? "http://localhost:3000/"
+            : "https://shoe-marshal.vercel.app/",
+    );
 }

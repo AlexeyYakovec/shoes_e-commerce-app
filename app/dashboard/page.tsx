@@ -11,17 +11,12 @@ import { cn } from "@/lib/utils";
 import { DollarSign, PartyPopper, ShoppingBag, User2 } from "lucide-react";
 import React from "react";
 
-interface Props {
-    className?: string;
-}
-
-const Dashboard: React.FC<Props> = ({ className }) => {
+const Dashboard = () => {
     return (
         <>
             <div
                 className={cn(
                     "grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4",
-                    className,
                 )}>
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
