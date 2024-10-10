@@ -70,11 +70,11 @@ export const Navbar: React.FC<Props> = async ({ className }) => {
                     </>
                 ) : (
                     <div className="md:flex md:flex-1 md:items-center md:justify-end">
-                        <Button variant={"ghost"}>
+                        <Button variant={"ghost"} asChild>
                             <LoginLink>Sign in</LoginLink>
                         </Button>
                         <span className="h-6 w-px bg-gray-200"></span>
-                        <Button variant={"ghost"}>
+                        <Button variant={"ghost"} asChild>
                             <RegisterLink>Create Account</RegisterLink>
                         </Button>
                     </div>
