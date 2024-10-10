@@ -33,8 +33,6 @@ export async function GET() {
     }
 
     return NextResponse.redirect(
-        process.env.NODE_ENV === "development"
-            ? "http://localhost:3000/"
-            : "https://shoes-e-commerce-wes63bpt8-alyks-projects.vercel.app/",
+        process.env.NODE_ENV === "development" ? "http://localhost:3000/" : "",
     );
 }
