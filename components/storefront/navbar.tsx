@@ -12,12 +12,14 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { redis } from "@/app/lib/redis";
 import { Cart } from "@/app/lib/interfaces";
+import { unstable_noStore as noStore } from "next/cache";
 
 interface Props {
     className?: string;
 }
 
 export const Navbar: React.FC<Props> = async ({ className }) => {
+    noStore();
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
@@ -46,7 +48,7 @@ export const Navbar: React.FC<Props> = async ({ className }) => {
             </div>
 
             <div className="flex items-center">
-                <ModeToggle className="mr-12" />
+                {/* <ModeToggle className="mr-12" /> */}
                 {user ? (
                     <>
                         <Link
@@ -67,7 +69,7 @@ export const Navbar: React.FC<Props> = async ({ className }) => {
                         />
                     </>
                 ) : (
-                    <div className="hidden md:flex md:flex-1 md:items-center md:justify-end">
+                    <div className="md:flex md:flex-1 md:items-center md:justify-end">
                         <Button variant={"ghost"}>
                             <LoginLink>Sign in</LoginLink>
                         </Button>

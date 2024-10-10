@@ -44,13 +44,13 @@ export const ImageSlider: React.FC<Props> = ({ images }) => {
                         onClick={handlePreviosClick}
                         variant={"ghost"}
                         size={"icon"}>
-                        <ChevronLeft className="w-6 h-6" />
+                        <ChevronLeft className="w-6 h-6 text-white" />
                     </Button>
                     <Button
                         onClick={handleNextClick}
                         variant={"ghost"}
                         size={"icon"}>
-                        <ChevronRight className="w-6 h-6" />
+                        <ChevronRight className="w-6 h-6 text-white" />
                     </Button>
                 </div>
             </div>
