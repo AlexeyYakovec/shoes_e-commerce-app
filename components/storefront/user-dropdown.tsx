@@ -11,6 +11,7 @@ import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import Link from "next/link";
 
 interface Props {
     email: string;
@@ -43,6 +44,12 @@ export const UserDropdown: React.FC<Props> = ({ email, name, userImage }) => {
                 </DropdownMenuLabel>
 
                 <DropdownMenuSeparator />
+
+                {email === "alekseyyakovets8952@gmail.com" && (
+                    <DropdownMenuItem>
+                        <Link href="/dashboard">Dashboard</Link>
+                    </DropdownMenuItem>
+                )}
 
                 <DropdownMenuItem asChild>
                     <LogoutLink className="cursor-pointer">Log out</LogoutLink>
