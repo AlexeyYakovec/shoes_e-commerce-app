@@ -15,8 +15,8 @@ export async function createProduct(prevState: unknown, formData: FormData) {
 
     if (
         !user ||
-        user.email !== "alekseyyakovets8952@gmail.com" ||
-        "vt.yakovets@gmail.com"
+        (user.email !== "alekseyyakovets8952@gmail.com" &&
+            user.email !== "vt.yakovets@gmail.com")
     ) {
         return redirect("/");
     }
@@ -54,8 +54,8 @@ export async function editProduct(prevState: any, formData: FormData) {
 
     if (
         !user ||
-        user.email !== "alekseyyakovets8952@gmail.com" ||
-        "vt.yakovets@gmail.com"
+        (user.email !== "alekseyyakovets8952@gmail.com" &&
+            user.email !== "vt.yakovets@gmail.com")
     ) {
         return redirect("/");
     }
@@ -98,8 +98,8 @@ export async function deleteProduct(formData: FormData) {
 
     if (
         !user ||
-        user.email !== "alekseyyakovets8952@gmail.com" ||
-        "vt.yakovets@gmail.com"
+        (user.email !== "alekseyyakovets8952@gmail.com" &&
+            user.email !== "vt.yakovets@gmail.com")
     ) {
         return redirect("/");
     }
@@ -119,8 +119,8 @@ export async function createBanner(prevState: any, formData: FormData) {
 
     if (
         !user ||
-        user.email !== "alekseyyakovets8952@gmail.com" ||
-        "vt.yakovets@gmail.com"
+        (user.email !== "alekseyyakovets8952@gmail.com" &&
+            user.email !== "vt.yakovets@gmail.com")
     ) {
         return redirect("/");
     }
@@ -148,8 +148,8 @@ export async function deleteBanner(formData: FormData) {
 
     if (
         !user ||
-        user.email !== "alekseyyakovets8952@gmail.com" ||
-        "vt.yakovets@gmail.com"
+        (user.email !== "alekseyyakovets8952@gmail.com" &&
+            user.email !== "vt.yakovets@gmail.com")
     ) {
         return redirect("/");
     }

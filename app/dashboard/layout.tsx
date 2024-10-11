@@ -27,11 +27,7 @@ async function DashboardLayout({ children }: Props) {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
-    if (
-        !user ||
-        user.email !== "alekseyyakovets8952@gmail.com" ||
-        "vt.yakovets@gmail.com"
-    ) {
+    if (!user || user.email !== "alekseyyakovets8952@gmail.com") {
         return redirect("/");
     }
     return (
