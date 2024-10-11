@@ -46,7 +46,8 @@ export const UserDropdown: React.FC<Props> = ({ email, name, userImage }) => {
                 <DropdownMenuSeparator />
 
                 {(email === "alekseyyakovets8952@gmail.com" ||
-                    email === "vt.yakovets@gmail.com") && (
+                    email === "vt.yakovets@gmail.com" ||
+                    email === "pajiaduh2222@gmail.com") && (
                     <DropdownMenuItem>
                         <Link href="/dashboard">Dashboard</Link>
                     </DropdownMenuItem>

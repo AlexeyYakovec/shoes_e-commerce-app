@@ -26,10 +26,15 @@ async function DashboardLayout({ children }: Props) {
     noStore();
     const { getUser } = getKindeServerSession();
     const user = await getUser();
-
-    if (!user || user.email !== "alekseyyakovets8952@gmail.com") {
+    if (
+        !user ||
+        (user.email !== "alekseyyakovets8952@gmail.com" &&
+            user.email !== "vt.yakovets@gmail.com" &&
+            user.email !== "pajiaduh2222@gmail.com")
+    ) {
         return redirect("/");
     }
+
     return (
         <div className="flex w-full flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-background">
